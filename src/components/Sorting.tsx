@@ -1,5 +1,5 @@
 import React from 'react'
-import { RadioContainer, RadioTitle } from './styledComponents'
+import { RadioContainer, RadioLabel, RadioTitle } from './styledComponents'
 
 interface SortingProps {
   setSortMethod: React.Dispatch<React.SetStateAction<string>>
@@ -16,11 +16,11 @@ const Sorting: React.VFC<SortingProps> = ({ setSortMethod, sortMethod }) => {
       <RadioTitle>Sort By</RadioTitle>
       <div>
         <input type="radio" id="name" value="name" checked={sortMethod === 'name'} onChange={changeMethod} />
-        <label htmlFor="name">Name</label>
+        <RadioLabel htmlFor="name">Name</RadioLabel>
       </div>
       <div>
         <input type="radio" id="office" value="office" checked={sortMethod === 'office'} onChange={changeMethod} />
-        <label htmlFor="office">Office</label>
+        <RadioLabel htmlFor="office">Office</RadioLabel>
       </div>
     </RadioContainer>
   )

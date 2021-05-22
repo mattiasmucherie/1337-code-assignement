@@ -6,6 +6,9 @@ export const RadioContainer = styled.div`
 export const RadioTitle = styled.h4`
   margin: 5px 0;
 `
+export const RadioLabel = styled.label`
+  padding-left: 5px;
+`
 
 const DotDotDot = keyframes`
   33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}

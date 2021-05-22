@@ -1,5 +1,5 @@
 import React from 'react'
-import { RadioContainer, RadioTitle } from './styledComponents'
+import { RadioContainer, RadioLabel, RadioTitle } from './styledComponents'
 
 interface DisplayChoiceProps {
   setDisplayMethod: React.Dispatch<React.SetStateAction<string>>
@@ -16,11 +16,11 @@ const DisplayChoice: React.VFC<DisplayChoiceProps> = ({ setDisplayMethod, displa
       <RadioTitle>Display Mode</RadioTitle>
       <div>
         <input type="radio" id="grid" value="grid" checked={displayMethod === 'grid'} onChange={changeMethod} />
-        <label htmlFor="grid">Grid</label>
+        <RadioLabel htmlFor="grid">Grid</RadioLabel>
       </div>
       <div>
         <input type="radio" id="list" value="list" checked={displayMethod === 'list'} onChange={changeMethod} />
-        <label htmlFor="list">List</label>
+        <RadioLabel htmlFor="list">List</RadioLabel>
       </div>
     </RadioContainer>
   )

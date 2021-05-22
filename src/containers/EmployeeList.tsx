@@ -22,7 +22,7 @@ const EmployeeContainer = styled.section<EmployeeContainerProps>`
   grid-gap: 20px;
   grid-template-columns: ${props => (props.displayMethod === 'grid' ? 'repeat(auto-fit, 300px)' : '1fr')};
   justify-content: center;
-  margin: 0 2vw;
+  padding: 0 10px;
 `
 const ChoiceContainer = styled.section`
   display: flex;

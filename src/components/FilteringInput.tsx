@@ -4,7 +4,7 @@ import { Employee } from '../types/employee'
 import useDebounce from '../hooks/useDebounce'
 
 const InputContainer = styled.section`
-  margin: 0 10vw 20px;
+  padding: 0 10vw 20px;
 `
 
 const Input = styled.input`
