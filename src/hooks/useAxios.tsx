@@ -13,7 +13,7 @@ function useAxios<T = any>(url: string) {
     const fetchData = async () => {
       try {
         setIsLoading(true)
-        const resp: AxiosResponse<T> = await axios.get('https://api-dev.1337co.de/v3/employees')
+        const resp: AxiosResponse<T> = await axios.get(url)
         setResponse(resp.data)
       } catch (err) {
         setHasError(true)
