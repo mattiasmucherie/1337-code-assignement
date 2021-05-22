@@ -1,4 +1,4 @@
-# 1337 Code Assignment
+# tretton37 Code Assignment
 
 ## Running the application locally
 Start with  installing the dependencies with 
