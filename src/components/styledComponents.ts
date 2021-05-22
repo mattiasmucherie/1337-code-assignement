@@ -1,7 +1,7 @@
 import styled, { keyframes } from 'styled-components'
 
 export const RadioContainer = styled.div`
-  padding: 10px 40px 10px 0;
+  padding: 10px 20px;
 `
 export const RadioTitle = styled.h4`
   margin: 5px 0;
