@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Employee } from '../types/employee'
+import GithubIcon from '../icons/github-square-brands.svg'
+import LinkedInIcon from '../icons/linkedin-brands.svg'
+import TwitterIcon from '../icons/twitter-square-brands.svg'
 
 const Card = styled.div`
   background: #ffffff;
@@ -19,7 +22,7 @@ const PortraitImage = styled.img`
 const EmployeeInfo = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: 'column';
+  flex-direction: column;
   justify-content: space-between;
 `
 const EmployeeName = styled.h3`
@@ -30,6 +33,17 @@ const EmployeeName = styled.h3`
 const EmployeeOffice = styled.p`
   font-size: 12px;
 `
+const IconContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+`
+const Icon = styled.img`
+  width: 30px;
+  padding: 0 5px;
+`
+const SocialLink = styled.a``
+
 interface EmployeeCardProps {
   employee: Employee
 }
@@ -47,6 +61,23 @@ const EmployeeCard: React.VFC<EmployeeCardProps> = ({ employee }) => {
           <EmployeeName>{employee.name}</EmployeeName>
           <EmployeeOffice>Office: {employee.office}</EmployeeOffice>
         </div>
+        <IconContainer>
+          {employee.gitHub && (
+            <SocialLink href={`https://github.com/${employee.gitHub}`} target="_blank" rel="noreferrer">
+              <Icon src={GithubIcon} alt="Github icon" />
+            </SocialLink>
+          )}
+          {employee.linkedIn && (
+            <SocialLink href={`https://www.linkedin.com${employee.linkedIn}`} target="_blank" rel="noreferrer">
+              <Icon src={LinkedInIcon} alt="LinkedIn icon" />
+            </SocialLink>
+          )}
+          {employee.twitter && (
+            <SocialLink href={`https://twitter.com/${employee.twitter}`} target="_blank" rel="noreferrer">
+              <Icon src={TwitterIcon} alt="Twitter icon" />
+            </SocialLink>
+          )}
+        </IconContainer>
       </EmployeeInfo>
     </Card>
   )
