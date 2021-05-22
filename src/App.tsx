@@ -1,7 +1,8 @@
 import React from 'react'
+import EmployeeList from './containers/EmployeeList'
 
 function App() {
-  return <div>The fellowship of tretton37</div>
+  return <EmployeeList />
 }
 
 export default App
