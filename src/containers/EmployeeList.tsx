@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import EmployeeCard from '../components/EmployeeCard'
+import FilteringInput from '../components/FilteringInput'
 import { ErrorMessage, Loader } from '../components/styledComponents'
 import useAxios from '../hooks/useAxios'
 import { Employee } from '../types/employee'
@@ -31,6 +32,8 @@ const EmployeeList = () => {
   return (
     <>
       <Header>The fellowship of tretton37</Header>
+      <FilteringInput setFilteredEmployees={setFilteredEmployees} employees={employees} />
+
       {isLoading && <Loader />}
       {hasError && <ErrorMessage>Error loading employees :(</ErrorMessage>}
       <EmployeeContainer>
