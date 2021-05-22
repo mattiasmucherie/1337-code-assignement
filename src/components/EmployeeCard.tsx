@@ -5,6 +5,9 @@ import GithubIcon from '../icons/github-square-brands.svg'
 import LinkedInIcon from '../icons/linkedin-brands.svg'
 import TwitterIcon from '../icons/twitter-square-brands.svg'
 
+interface DisplayMethodProps {
+  displayMethod: string
+}
 const Card = styled.div`
   background: #ffffff;
   box-shadow: 1px 2px 3px rgba(220, 221, 224, 0.6);
@@ -19,10 +22,10 @@ const PortraitImage = styled.img`
   border-radius: 0 0 5px 5px;
   margin: 5px;
 `
-const EmployeeInfo = styled.div`
+const EmployeeInfo = styled.div<DisplayMethodProps>`
   width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: ${props => (props.displayMethod === 'list' ? 'row' : 'column')};
   justify-content: space-between;
 `
 const EmployeeName = styled.h3`
@@ -46,17 +49,20 @@ const SocialLink = styled.a``
 
 interface EmployeeCardProps {
   employee: Employee
+  displayMethod: string
 }
-const EmployeeCard: React.VFC<EmployeeCardProps> = ({ employee }) => {
-  const testId = `-${employee.name.toLowerCase().replace(' ', '-')}`
+const EmployeeCard: React.VFC<EmployeeCardProps> = ({ employee, displayMethod }) => {
+  const testId = `${displayMethod}-${employee.name.toLowerCase().replace(' ', '-')}`
   return (
     <Card data-testid={`card-${testId}`}>
-      <PortraitImage
-        src={employee.imagePortraitUrl || 'https://via.placeholder.com/115X153'}
-        alt={`portrait of ${employee.name}`}
-      />
+      {displayMethod === 'grid' && (
+        <PortraitImage
+          src={employee.imagePortraitUrl || 'https://via.placeholder.com/115X153'}
+          alt={`portrait of ${employee.name}`}
+        />
+      )}
 
-      <EmployeeInfo>
+      <EmployeeInfo displayMethod={displayMethod}>
         <div>
           <EmployeeName>{employee.name}</EmployeeName>
           <EmployeeOffice>Office: {employee.office}</EmployeeOffice>

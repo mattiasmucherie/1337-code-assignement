@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+import DisplayChoice from '../components/DisplayChoice'
 import EmployeeCard from '../components/EmployeeCard'
 import FilteringInput from '../components/FilteringInput'
 import Sorting from '../components/Sorting'
@@ -13,10 +14,13 @@ const Header = styled.h1`
   font-weight: bold;
   text-align: center;
 `
-const EmployeeContainer = styled.section`
+interface EmployeeContainerProps {
+  displayMethod: string
+}
+const EmployeeContainer = styled.section<EmployeeContainerProps>`
   display: grid;
   grid-gap: 20px;
-  grid-template-columns: repeat(auto-fit, 300px);
+  grid-template-columns: ${props => (props.displayMethod === 'grid' ? 'repeat(auto-fit, 300px)' : '1fr')};
   justify-content: center;
   margin: 0 2vw;
 `
@@ -29,6 +33,7 @@ const ChoiceContainer = styled.section`
 const EmployeeList = () => {
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([])
   const [sortMethod, setSortMethod] = useState('name')
+  const [displayMethod, setDisplayMethod] = useState('grid')
 
   const { isLoading, hasError, response: employees } = useAxios<Employee[]>('https://api-dev.1337co.de/v3/employees')
   useEffect(() => {
@@ -46,15 +51,15 @@ const EmployeeList = () => {
     <>
       <Header>The fellowship of tretton37</Header>
       <FilteringInput setFilteredEmployees={setFilteredEmployees} employees={employees} />
-
       <ChoiceContainer>
         <Sorting setSortMethod={setSortMethod} sortMethod={sortMethod} />
+        <DisplayChoice setDisplayMethod={setDisplayMethod} displayMethod={displayMethod} />
       </ChoiceContainer>
       {isLoading && <Loader />}
       {hasError && <ErrorMessage>Error loading employees :(</ErrorMessage>}
-      <EmployeeContainer>
+      <EmployeeContainer displayMethod={displayMethod}>
         {employeesToDisplay.map(emp => (
-          <EmployeeCard key={emp.name} employee={emp} />
+          <EmployeeCard key={emp.name} employee={emp} displayMethod={displayMethod} />
         ))}
       </EmployeeContainer>
     </>
