@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Employee } from '../types/employee'
+import useDebounce from '../hooks/useDebounce'
 
 const InputContainer = styled.div`
   margin: 0 10vw 20px;
@@ -25,21 +26,28 @@ interface FilteringInputProps {
   employees: Employee[] | null
 }
 const FilteringInput: React.VFC<FilteringInputProps> = ({ setFilteredEmployees, employees }) => {
-  const onChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-    const inputText = e.target.value.toLowerCase()
+  const [searchTerm, setSearchTerm] = useState('')
+  const debouncedSearchTerm = useDebounce(searchTerm, 200)
+
+  useEffect(() => {
     if (employees) {
       setFilteredEmployees(
         employees.filter(emp => {
           const employeeName = emp.name.toLowerCase()
           const employeeOffice = emp.office?.toLowerCase()
-          return employeeName.includes(inputText) || employeeOffice?.includes(inputText)
+          return employeeName.includes(debouncedSearchTerm) || employeeOffice?.includes(debouncedSearchTerm)
         })
       )
     }
-  }
+  }, [debouncedSearchTerm, employees, setFilteredEmployees])
+
   return (
     <InputContainer>
-      <Input onChange={onChange} placeholder="Filter by name or office" aria-label="filtering-input" />
+      <Input
+        onChange={e => setSearchTerm(e.target.value.toLowerCase())}
+        placeholder="Filter by name or office"
+        aria-label="filtering-input"
+      />
     </InputContainer>
   )
 }
